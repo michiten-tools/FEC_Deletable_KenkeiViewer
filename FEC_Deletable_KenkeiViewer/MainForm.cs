@@ -87,7 +87,7 @@ namespace FEC_Deletable_KenkeiViewer
 
             });
 
-            
+
 
 
             dispList = ConvertModel(pairsModel);
@@ -229,13 +229,15 @@ namespace FEC_Deletable_KenkeiViewer
 
             pairsModel.Items.ForEach(x => x.Index = pairsModel.Items.IndexOf(x));
 
-            string jsonSavePath = Path.Combine(txtFolder.Text, "消したやつ.json");
+            string jsonSavePath = Path.Combine(txtFolder.Text, "delete.json");
             using(StreamWriter sw = new StreamWriter(jsonSavePath))
             {
                 sw.Write(JsonConvert.SerializeObject(pairsModel, Formatting.Indented));
             }
 
-            MessageBox.Show("消しました。いろいろ問");
+            MessageBox.Show("消しました。\nいろいろ困ることあるので閉じます。");
+
+            Application.Exit();
 
         }
 
