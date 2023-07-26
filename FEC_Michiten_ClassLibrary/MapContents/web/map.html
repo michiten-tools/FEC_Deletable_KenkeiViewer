@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./lib/leaflet/1.8.0/leaflet.css"
+          crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="./lib/leaflet/1.8.0/leaflet.js"
+            crossorigin="">
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/map.css">
+    <script src="./js/map.js"></script>
+    <script src="./js/icon.js"></script>
+    <script src="./js/longitem.js"></script>
+    <script src="./js/circle.js"></script>
+    <script src="./js/polygon.js"></script>
+</head>
+<body>
+    <div id="mapid"></div>
+
+    <script>
+        // tokyo station
+        //var mymap = L.map('mapid').setView([35.681318, 139.767079], 18);
+
+        // hachioji sta.
+        //var mymap = L.map('mapid').setView([35.656776, 139.339250], 16);
+
+        var std_map = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+            attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイルを加工して作成</a>",
+            maxZoom: 23,
+            maxNativeZoom: 18});
+
+        var pale_map = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
+            attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイルを加工して作成</a>",
+            maxZoom: 23,
+            maxNativeZoom: 18});
+
+        var seamlessphoto_map = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', {
+            attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイルを加工して作成</a>",
+            maxZoom: 23,
+            maxNativeZoom: 18});
+
+        var os_map = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: "Map data © <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors",
+            maxZoom: 23,
+            maxNativeZoom: 18});
+
+        var myMaps = {
+            "地理院地図 淡色": pale_map,
+            "地理院地図 標準": std_map,
+            "地理院地図 写真": seamlessphoto_map,
+            "OpenStreetMap": os_map
+        };
+
+        var mymap = new L.map('mapid', {
+            center: [35.681318, 139.767079],
+            zoom: 18,
+            minZoom: 5,
+            layers: [pale_map]
+        });
+        L.control.layers(myMaps).addTo(mymap);
+
+        mymap.on('zoomend', setIconSize);
+
+        mymap.on('moveend', getMapBounds);
+
+        mymap.on('click', function(e) {
+
+            
+            chrome.webview.hostObjects.class.OnManualClick(e.latlng.lat + "," + e.latlng.lng);
+        });
+
+        setIcons();
+
+        var popup = L.popup();
+
+        var kmlGroup = L.layerGroup().addTo(mymap);
+        var cursorGroup = L.layerGroup().addTo(mymap);
+
+        var GroupA = L.layerGroup().addTo(mymap);
+        var GroupB = L.layerGroup().addTo(mymap);
+        var GroupC = L.layerGroup().addTo(mymap);
+        var GroupD = L.layerGroup().addTo(mymap);
+        var GroupK = L.layerGroup().addTo(mymap);
+        var GroupL = L.layerGroup().addTo(mymap);
+
+        var GroupO = L.layerGroup().addTo(mymap);
+        var GroupP = L.layerGroup().addTo(mymap);
+
+        var GroupS = L.layerGroup().addTo(mymap);
+        var GroupT = L.layerGroup().addTo(mymap);
+
+        var GroupU = L.layerGroup().addTo(mymap);
+        var GroupV = L.layerGroup().addTo(mymap);
+        var GroupW = L.layerGroup().addTo(mymap);
+
+        var GroupX = L.layerGroup().addTo(mymap);
+        var GroupE = L.layerGroup().addTo(mymap);
+        var GroupF = L.layerGroup().addTo(mymap);
+        var GroupQ = L.layerGroup().addTo(mymap);
+        var GroupM = L.layerGroup().addTo(mymap);
+        var GroupN = L.layerGroup().addTo(mymap);
+
+        var GroupOrg = L.layerGroup().addTo(mymap);
+        var GroupSrc = L.layerGroup().addTo(mymap);
+        var GroupDst = L.layerGroup().addTo(mymap);
+
+        var lineGroup = L.layerGroup().addTo(mymap);
+        var circleGroup = L.layerGroup().addTo(mymap);
+
+        L.control.scale({ imperial: false }).addTo(mymap);
+
+        var polygonLayer = L.layerGroup().addTo(mymap);
+
+    </script>
+</body>
+</html>
