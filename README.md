@@ -1,1 +1,1 @@
-# FEC_Deletable_KenkeiViewer
+削除機能付きビューア
