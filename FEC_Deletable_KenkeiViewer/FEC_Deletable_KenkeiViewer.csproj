@@ -128,6 +128,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -202,6 +203,7 @@
     <Content Include="MapContents\web\saitama\iconQ.png" />
     <Content Include="MapContents\web\saitama\iconS.png" />
     <Content Include="MapContents\web\saitama\iconT.png" />
+    <None Include="Resources\fantasy_maou_devil.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

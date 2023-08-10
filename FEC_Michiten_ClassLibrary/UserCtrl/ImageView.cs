@@ -78,6 +78,8 @@ namespace FEC_Michiten_ClassLibrary.UserCtrl
             if(item == null)
             {
                 picImage.Image.Dispose();
+                picImage.Image = null;
+                zoomFunc.DisposeImg();
                 return;
             }
 

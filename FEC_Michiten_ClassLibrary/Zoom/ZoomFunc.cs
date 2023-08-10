@@ -64,6 +64,14 @@ namespace FEC_Michiten_ClassLibrary.Zoom
             graphics.Dispose();
         }
 
+
+        public void DisposeImg()
+        {
+            if (bmp != null) bmp.Dispose();
+            if (graphics != null) graphics.Dispose();
+            if (matrix != null) matrix.Dispose();
+
+        }
         private void DrawImage()
         {
             if (bmp == null)
@@ -113,13 +121,12 @@ namespace FEC_Michiten_ClassLibrary.Zoom
             graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             DrawImage();
-            graphics.Dispose();
 
         }
 
         private void pbImg_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (matrix == null)
+            if (matrix == null || pbImg.Image == null)
                 return;
 
             matrix.Translate(-e.X, -e.Y, MatrixOrder.Append);
@@ -140,7 +147,7 @@ namespace FEC_Michiten_ClassLibrary.Zoom
 
         private void pbImg_MouseDown(object sender, MouseEventArgs e)
         {
-            if (matrix == null)
+            if (matrix == null || pbImg.Image == null)
                 return;
 
             if (e.Button.Equals(MouseButtons.Right))
@@ -159,7 +166,7 @@ namespace FEC_Michiten_ClassLibrary.Zoom
 
         private void pbImg_MouseMove(object sender, MouseEventArgs e)
         {
-            if (matrix == null)
+            if (matrix == null || pbImg.Image == null)
                 return;
 
             if (isDragging == true)
