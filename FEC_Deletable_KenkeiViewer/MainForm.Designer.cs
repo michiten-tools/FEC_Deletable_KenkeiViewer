@@ -63,7 +63,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(15, 15);
+            this.label1.Location = new System.Drawing.Point(20, 19);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 16);
             this.label1.TabIndex = 0;
@@ -72,17 +73,19 @@
             // txtFolder
             // 
             this.txtFolder.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtFolder.Location = new System.Drawing.Point(107, 12);
+            this.txtFolder.Location = new System.Drawing.Point(143, 15);
+            this.txtFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFolder.Name = "txtFolder";
-            this.txtFolder.Size = new System.Drawing.Size(451, 23);
+            this.txtFolder.Size = new System.Drawing.Size(600, 23);
             this.txtFolder.TabIndex = 1;
             // 
             // bFolder
             // 
             this.bFolder.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bFolder.Location = new System.Drawing.Point(564, 8);
+            this.bFolder.Location = new System.Drawing.Point(752, 10);
+            this.bFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bFolder.Name = "bFolder";
-            this.bFolder.Size = new System.Drawing.Size(75, 35);
+            this.bFolder.Size = new System.Drawing.Size(100, 44);
             this.bFolder.TabIndex = 2;
             this.bFolder.Text = "読込";
             this.bFolder.UseVisualStyleBackColor = true;
@@ -101,9 +104,10 @@
             // bDelete
             // 
             this.bDelete.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bDelete.Location = new System.Drawing.Point(46, 655);
+            this.bDelete.Location = new System.Drawing.Point(61, 819);
+            this.bDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bDelete.Name = "bDelete";
-            this.bDelete.Size = new System.Drawing.Size(75, 71);
+            this.bDelete.Size = new System.Drawing.Size(100, 89);
             this.bDelete.TabIndex = 0;
             this.bDelete.Text = "削除";
             this.bDelete.UseVisualStyleBackColor = true;
@@ -112,9 +116,10 @@
             // bDeleteBack
             // 
             this.bDeleteBack.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bDeleteBack.Location = new System.Drawing.Point(163, 655);
+            this.bDeleteBack.Location = new System.Drawing.Point(217, 819);
+            this.bDeleteBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bDeleteBack.Name = "bDeleteBack";
-            this.bDeleteBack.Size = new System.Drawing.Size(75, 71);
+            this.bDeleteBack.Size = new System.Drawing.Size(100, 89);
             this.bDeleteBack.TabIndex = 0;
             this.bDeleteBack.Text = "削除\r\nしない";
             this.bDeleteBack.UseVisualStyleBackColor = true;
@@ -123,9 +128,10 @@
             // bSave
             // 
             this.bSave.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bSave.Location = new System.Drawing.Point(277, 655);
+            this.bSave.Location = new System.Drawing.Point(369, 819);
+            this.bSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bSave.Name = "bSave";
-            this.bSave.Size = new System.Drawing.Size(75, 71);
+            this.bSave.Size = new System.Drawing.Size(100, 89);
             this.bSave.TabIndex = 0;
             this.bSave.Text = "保存";
             this.bSave.UseVisualStyleBackColor = true;
@@ -136,7 +142,8 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(712, 8);
+            this.splitContainer1.Location = new System.Drawing.Point(949, 10);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -147,34 +154,39 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.webViewCustom);
-            this.splitContainer1.Size = new System.Drawing.Size(708, 797);
-            this.splitContainer1.SplitterDistance = 562;
+            this.splitContainer1.Size = new System.Drawing.Size(944, 996);
+            this.splitContainer1.SplitterDistance = 702;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 6;
             // 
             // listView
             // 
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(708, 562);
+            this.listView.Size = new System.Drawing.Size(944, 702);
             this.listView.TabIndex = 0;
             this.listView.ListSelectChanged += new System.EventHandler(this.listView_ListSelectChanged);
+            this.listView.ListCellEndEditEvent += new FEC_Michiten_ClassLibrary.UserCtrl.ListView.ListCellEndEditHandler(this.listView_ListCellEndEditEvent);
             // 
             // webViewCustom
             // 
             this.webViewCustom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webViewCustom.Location = new System.Drawing.Point(0, 0);
+            this.webViewCustom.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.webViewCustom.Name = "webViewCustom";
-            this.webViewCustom.Size = new System.Drawing.Size(708, 231);
+            this.webViewCustom.Size = new System.Drawing.Size(944, 289);
             this.webViewCustom.TabIndex = 1;
             this.webViewCustom.WebViewIconClickEvent += new FEC_Michiten_ClassLibrary.Map.MapFunc.IconClickEventHandler(this.webViewCustom_WebViewIconClickEvent);
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(251, 748);
+            this.textBox1.Location = new System.Drawing.Point(335, 935);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(455, 23);
+            this.textBox1.Size = new System.Drawing.Size(605, 23);
             this.textBox1.TabIndex = 7;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -182,7 +194,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(160, 751);
+            this.label2.Location = new System.Drawing.Point(213, 939);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 16);
             this.label2.TabIndex = 0;
@@ -191,16 +204,17 @@
             // imageView
             // 
             this.imageView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageView.Location = new System.Drawing.Point(12, 49);
+            this.imageView.Location = new System.Drawing.Point(16, 61);
+            this.imageView.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.imageView.Name = "imageView";
-            this.imageView.Size = new System.Drawing.Size(694, 586);
+            this.imageView.Size = new System.Drawing.Size(925, 732);
             this.imageView.TabIndex = 5;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1422, 817);
+            this.ClientSize = new System.Drawing.Size(1896, 1021);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.bSave);
@@ -212,6 +226,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "すべてを消してくれるわ";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -90,9 +90,13 @@ namespace FEC_Michiten_ClassLibrary.UserCtrl
 
             SignItem item = listFunc.GetSelectedItem(dispList);
 
-            string value = dgvItemList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
+            string value = string.Empty;
+            if(dgvItemList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                value = dgvItemList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            }
             ListCellEndEditEvent?.Invoke(item, value);
+
         }
     }
 }

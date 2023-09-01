@@ -61,7 +61,7 @@ namespace FEC_Deletable_KenkeiViewer
             ///ダイアログ表示
             CommonOpenFileDialog dialog = new CommonOpenFileDialog()
             {
-                Title = "JSON突っ込んであるのはどこよ？",
+                Title = "JSON入ってるのはどこyo？",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 // フォルダ選択モードにする
                 IsFolderPicker = true,
@@ -130,10 +130,74 @@ namespace FEC_Deletable_KenkeiViewer
             //dispList = ConvertModel(pairsModel);
 
             //リストと地図と画像初期化
+            UpdateList();
             listView.Init(dispList, folderName);
             imageView.Init(folderName);
             webViewCustom.AddIconTarget(dispList);
             isOpen = true;
+        }
+
+        private void UpdateList()
+        {
+            dispList.ForEach(disp =>
+            {
+                string dispstr = GetLabel(disp.Label);
+                if (!string.IsNullOrEmpty(dispstr))
+                {
+
+                    bool flg = false;
+                    foreach (var x in dispList)
+                    {
+                        string xstr = GetLabel(x.Label);
+
+                        if (!x.Equals(disp) && dispstr == xstr && disp.Memo != x.Memo)
+                        {
+                            flg = true;
+                            break;
+                        }
+                    }
+
+                    if(flg)
+                    {
+                        disp.address.Ken = "a";
+                    }
+                    else
+                    {
+                        disp.address.Ken = "";
+                    }
+                    //FEC_Michiten_ClassLibrary.Models.SignItem signItem = dispList.FirstOrDefault(x => x.Label.Contains("[[[") && x.Label.Substring(0, disp.Label.IndexOf("[[[")) == src);
+
+                    //if (signItem != null)
+                    //{
+                    //    disp.address.Ken = "a";
+                    //}
+                    //else
+                    //{
+                    //    disp.address.Ken = "";
+                    //}
+                }
+                else
+                {
+                    disp.address.Ken = "";
+                }
+            });
+        }
+
+        private string GetLabel(string label)
+        {
+            if(string.IsNullOrEmpty(label))
+            {
+                return string.Empty;
+            }
+            else if(label.Contains("[[["))
+            {
+                return label.Substring(0, label.IndexOf("[[["));
+            }
+            else
+            {
+                return label;
+            }
+
         }
 
         /// <summary>
@@ -263,28 +327,23 @@ namespace FEC_Deletable_KenkeiViewer
                 return;
 
             //本当に消すから何回も聞く
-            if (MessageBox.Show("消すよ？\nいいのね？","消すよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            if (MessageBox.Show("消すyo？\nいいのね？","消すよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 == DialogResult.No)
             {
                 return;
             }
 
-            if (MessageBox.Show("本当に消すよ？\n知らないよ？", "本気よ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            if (MessageBox.Show("本当に消すyo？\n知らないよ？", "本気よ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 == DialogResult.No)
             {
                 return;
             }
 
-            if (MessageBox.Show("マジで消すよ？\n後悔するよ？", "マジよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            if (MessageBox.Show("マジで消すyo？\n後悔するよ？", "マジよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 == DialogResult.No)
             {
                 return;
             }
-
-            //これしないと画像が消せない
-            imageView.SetImage(null);
-
-            string imagePath;
 
             //リスト繰り返し
             foreach (var item in dispList)
@@ -300,15 +359,26 @@ namespace FEC_Deletable_KenkeiViewer
                 if(item.IsSumi)
                 {
 
-                    //画像ファイルあれば削除
-                    imagePath = Path.Combine(txtFolder.Text,Define.DirFrames, tmp.ExportFileName);
-                    if(File.Exists(imagePath))
-                    {
-                        File.Delete(imagePath);
-                    }
+                    ////画像ファイルあれば削除
+                    //imagePath = Path.Combine(txtFolder.Text,Define.DirFrames, tmp.ExportFileName);
+                    //if(File.Exists(imagePath))
+                    //{
+                    //    File.Delete(imagePath);
+                    //}
 
                     //リストから消すのは、Aiちゃん用pairsmodel、つまりJSONから消す
                     tmpPm.Items.Remove(tmp);
+                }
+
+                if(!string.IsNullOrEmpty(item.Label))
+                {
+                    tmp.Rename.Rename = item.Label;
+                    tmp.Rename.Selected = true;
+                }
+                else
+                {
+                    tmp.Rename.Rename = string.Empty;
+                    tmp.Rename.Selected = false;
                 }
 
             }
@@ -334,7 +404,7 @@ namespace FEC_Deletable_KenkeiViewer
                 }
             }
 
-            MessageBox.Show("消しました。");
+            MessageBox.Show("消しましたyo。");
 
             isOpen = false;
             listView.dgvItemList.Rows.Clear();
@@ -356,6 +426,41 @@ namespace FEC_Deletable_KenkeiViewer
 
             currentItem = item;
             listView.SetSelectedItem(currentItem);
+        }
+
+        private void listView_ListCellEndEditEvent(FEC_Michiten_ClassLibrary.Models.SignItem item, string value)
+        {
+
+            bool flg = false;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                item.Label = value;
+                UpdateList();
+                listView.Init(dispList, string.Empty);
+                return;
+            }
+            foreach (FEC_Michiten_ClassLibrary.Models.SignItem sign in dispList)
+            {
+                if (sign.Label == value && sign.No != item.No)
+                {
+                    flg = true;
+                    break;
+                }
+            }
+
+            if(flg)
+            {
+                MessageBox.Show("既にあるyo");
+            }
+            else
+            {
+                item.Label = value;
+            }
+
+            UpdateList();
+            listView.Init(dispList, string.Empty);
+
         }
     }
 

@@ -62,7 +62,15 @@ namespace FEC_Michiten_ClassLibrary.Pairs
                 view.Rows[index].Cells["label"].Value = item.Label;
                 //if (item.IsSumi)
                 //	view.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
+
+				if(item.address.Ken == "a")
+				{
+                    view.Rows[index].DefaultCellStyle.BackColor = Color.Red;
+
+                }
             }
+
+
 
 			// 列表示の切り替え
 			if (mode.Equals(PairsMode.Lot))
