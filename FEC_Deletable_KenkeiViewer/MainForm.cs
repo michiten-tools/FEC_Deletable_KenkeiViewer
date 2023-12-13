@@ -430,14 +430,12 @@ namespace FEC_Deletable_KenkeiViewer
 
         private void listView_ListCellEndEditEvent(FEC_Michiten_ClassLibrary.Models.SignItem item, string value)
         {
-
             bool flg = false;
 
             if (string.IsNullOrEmpty(value))
             {
                 item.Label = value;
                 UpdateList();
-                listView.Init(dispList, string.Empty);
                 return;
             }
             foreach (FEC_Michiten_ClassLibrary.Models.SignItem sign in dispList)
@@ -459,8 +457,6 @@ namespace FEC_Deletable_KenkeiViewer
             }
 
             UpdateList();
-            listView.Init(dispList, string.Empty);
-
         }
     }
 
