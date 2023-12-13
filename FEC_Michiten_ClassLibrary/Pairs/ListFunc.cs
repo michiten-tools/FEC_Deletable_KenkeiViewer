@@ -26,7 +26,7 @@ namespace FEC_Michiten_ClassLibrary.Pairs
 
 		public void UpdateList(List<SignItem> items, PairsMode mode)
 		{
-            // リストをクリア
+			// リストをクリア
 			view.Rows.Clear();
 
 			// リストを追加

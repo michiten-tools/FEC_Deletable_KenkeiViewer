@@ -89,7 +89,7 @@ namespace FEC_Michiten_ClassLibrary.UserCtrl
         {
 
             SignItem item = listFunc.GetSelectedItem(dispList);
-            
+
             string value = string.Empty;
             if(dgvItemList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
