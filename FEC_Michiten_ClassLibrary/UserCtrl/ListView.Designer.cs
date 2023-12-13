@@ -78,7 +78,6 @@
             this.dgvItemList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItemList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItemList.Location = new System.Drawing.Point(0, 0);
-            this.dgvItemList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvItemList.MultiSelect = false;
             this.dgvItemList.Name = "dgvItemList";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -92,7 +91,7 @@
             this.dgvItemList.RowHeadersVisible = false;
             this.dgvItemList.RowTemplate.Height = 21;
             this.dgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItemList.Size = new System.Drawing.Size(895, 638);
+            this.dgvItemList.Size = new System.Drawing.Size(671, 510);
             this.dgvItemList.TabIndex = 87;
             this.dgvItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemList_CellClick);
             this.dgvItemList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemList_CellDoubleClick);
@@ -157,17 +156,17 @@
             // 
             // label
             // 
+            this.label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.label.HeaderText = "ラベル";
             this.label.Name = "label";
             // 
             // ListView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvItemList);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ListView";
-            this.Size = new System.Drawing.Size(895, 638);
+            this.Size = new System.Drawing.Size(671, 510);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
             this.ResumeLayout(false);
 
