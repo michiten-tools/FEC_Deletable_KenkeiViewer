@@ -38,11 +38,11 @@
             this.bDeleteBack = new System.Windows.Forms.Button();
             this.bSave = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.listView = new FEC_Michiten_ClassLibrary.UserCtrl.ListView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.imageView = new FEC_Michiten_ClassLibrary.UserCtrl.ImageView();
+            this.listView = new FEC_Michiten_ClassLibrary.UserCtrl.ListView();
             this.webViewCustom = new FEC_Michiten_ClassLibrary.UserCtrl.WebViewCustom();
+            this.imageView = new FEC_Michiten_ClassLibrary.UserCtrl.ImageView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -148,19 +148,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.webViewCustom);
             this.splitContainer1.Size = new System.Drawing.Size(708, 797);
-            this.splitContainer1.SplitterDistance = 484;
+            this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 6;
-            // 
-            // listView
-            // 
-            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(708, 484);
-            this.listView.TabIndex = 0;
-            this.listView.ListSelectChanged += new System.EventHandler(this.listView_ListSelectChanged);
-            this.listView.ListCellEndEditEvent += new FEC_Michiten_ClassLibrary.UserCtrl.ListView.ListCellEndEditHandler(this.listView_ListCellEndEditEvent);
             // 
             // textBox1
             // 
@@ -181,22 +170,33 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "検索してね";
             // 
-            // imageView
+            // listView
             // 
-            this.imageView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageView.Location = new System.Drawing.Point(12, 49);
-            this.imageView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.imageView.Name = "imageView";
-            this.imageView.Size = new System.Drawing.Size(694, 586);
-            this.imageView.TabIndex = 5;
+            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.Margin = new System.Windows.Forms.Padding(4);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(708, 455);
+            this.listView.TabIndex = 0;
+            this.listView.ListSelectChanged += new System.EventHandler(this.listView_ListSelectChanged);
+            this.listView.ListCellEndEditEvent += new FEC_Michiten_ClassLibrary.UserCtrl.ListView.ListCellEndEditHandler(this.listView_ListCellEndEditEvent);
             // 
             // webViewCustom
             // 
             this.webViewCustom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webViewCustom.Location = new System.Drawing.Point(0, 0);
             this.webViewCustom.Name = "webViewCustom";
-            this.webViewCustom.Size = new System.Drawing.Size(708, 309);
+            this.webViewCustom.Size = new System.Drawing.Size(708, 338);
             this.webViewCustom.TabIndex = 0;
+            // 
+            // imageView
+            // 
+            this.imageView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imageView.Location = new System.Drawing.Point(12, 49);
+            this.imageView.Margin = new System.Windows.Forms.Padding(4);
+            this.imageView.Name = "imageView";
+            this.imageView.Size = new System.Drawing.Size(694, 586);
+            this.imageView.TabIndex = 5;
             // 
             // MainForm
             // 

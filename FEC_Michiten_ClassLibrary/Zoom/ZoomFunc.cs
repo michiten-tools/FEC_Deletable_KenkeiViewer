@@ -118,7 +118,7 @@ namespace FEC_Michiten_ClassLibrary.Zoom
             initScale = (float)pbImg.Width / bmp.Width;
 
             graphics.Transform = matrix;
-            graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
 
             DrawImage();
 
