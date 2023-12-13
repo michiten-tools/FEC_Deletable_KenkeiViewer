@@ -407,7 +407,7 @@ namespace FEC_Michiten_ClassLibrary.Map
 
         public void MoveMap(SignItem item)
         {
-			webView.ExecuteScriptAsync($"moveMap(\"{item.TimeTarget.Lat}\", \"{item.TimeTarget.Lng}\")");
+			webView.ExecuteScriptAsync($"moveMap(\"{item.TimeTarget.Lat.ToString(Define.LatLngFormat)}\", \"{item.TimeTarget.Lng.ToString(Define.LatLngFormat)}\")");
 		}
 
         public void MoveMap(Pin pin)
@@ -417,7 +417,7 @@ namespace FEC_Michiten_ClassLibrary.Map
         }
         public void OpenPopup(SignItem item)
         {
-			webView.ExecuteScriptAsync($"openPopup(\"{item.TimeTarget.Lat}\", \"{item.TimeTarget.Lng}\")");
+			webView.ExecuteScriptAsync($"openPopup(\"{item.TimeTarget.Lat.ToString(Define.LatLngFormat)} \", \" {item.TimeTarget.Lng.ToString(Define.LatLngFormat)}\")");
 		}
 
 		public void CloseAllPopup()
