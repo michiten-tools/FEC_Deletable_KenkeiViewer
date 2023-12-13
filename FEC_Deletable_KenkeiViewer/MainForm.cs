@@ -258,9 +258,9 @@ namespace FEC_Deletable_KenkeiViewer
             var item = listView.GetSelectedItem();
 
             //地図とか画像を連動
+            webViewCustom.OpenPopup(item);
             webViewCustom.SetCursor(item);
             webViewCustom.MoveMap(item);
-            webViewCustom.OpenPopup(item);
 
             imageView.SetImage(item);
             currentItem = item;
