@@ -114,7 +114,7 @@ namespace FEC_Michiten_ClassLibrary.UserCtrl
 
         public void SetCursor(SignItem item)
         {
-            miniMapFunc.dropCursorPin(item.TimeTarget.Lat.ToString(), item.TimeTarget.Lng.ToString());
+            miniMapFunc.dropCursorPin(item.TimeTarget.Lat.ToString(Define.LatLngFormat), item.TimeTarget.Lng.ToString(Define.LatLngFormat));
         }
 
         public void OpenPopup(SignItem item)
