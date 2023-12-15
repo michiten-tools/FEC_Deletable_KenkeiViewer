@@ -38,10 +38,10 @@
             this.bDeleteBack = new System.Windows.Forms.Button();
             this.bSave = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.listView = new FEC_Michiten_ClassLibrary.UserCtrl.ListView();
             this.webViewCustom = new FEC_Michiten_ClassLibrary.UserCtrl.WebViewCustom();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.imageView = new FEC_Michiten_ClassLibrary.UserCtrl.ImageView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -151,6 +151,26 @@
             this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 6;
             // 
+            // listView
+            // 
+            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.Margin = new System.Windows.Forms.Padding(4);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(708, 455);
+            this.listView.TabIndex = 0;
+            this.listView.ListSelectChanged += new System.EventHandler(this.listView_ListSelectChanged);
+            this.listView.ListcCellDClickEvent += new System.Windows.Forms.DataGridViewCellEventHandler(this.listView_ListcCellDClickEvent);
+            this.listView.ListCellEndEditEvent += new FEC_Michiten_ClassLibrary.UserCtrl.ListView.ListCellEndEditHandler(this.listView_ListCellEndEditEvent);
+            // 
+            // webViewCustom
+            // 
+            this.webViewCustom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webViewCustom.Location = new System.Drawing.Point(0, 0);
+            this.webViewCustom.Name = "webViewCustom";
+            this.webViewCustom.Size = new System.Drawing.Size(708, 338);
+            this.webViewCustom.TabIndex = 0;
+            // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -169,25 +189,6 @@
             this.label2.Size = new System.Drawing.Size(78, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "検索してね";
-            // 
-            // listView
-            // 
-            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.Margin = new System.Windows.Forms.Padding(4);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(708, 455);
-            this.listView.TabIndex = 0;
-            this.listView.ListSelectChanged += new System.EventHandler(this.listView_ListSelectChanged);
-            this.listView.ListCellEndEditEvent += new FEC_Michiten_ClassLibrary.UserCtrl.ListView.ListCellEndEditHandler(this.listView_ListCellEndEditEvent);
-            // 
-            // webViewCustom
-            // 
-            this.webViewCustom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webViewCustom.Location = new System.Drawing.Point(0, 0);
-            this.webViewCustom.Name = "webViewCustom";
-            this.webViewCustom.Size = new System.Drawing.Size(708, 338);
-            this.webViewCustom.TabIndex = 0;
             // 
             // imageView
             // 

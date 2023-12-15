@@ -21,12 +21,12 @@ namespace FEC_Michiten_ClassLibrary.Util
 		const int ERROR_LOCK_VIOLATION = 33;
 
 		public static void ErrMsg(string str)
-        {
-            MessageBox.Show(str,
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-        }
+		{
+			MessageBox.Show(str,
+				"エラー",
+				MessageBoxButtons.OK,
+				MessageBoxIcon.Error);
+		}
 
 		public static List<Control> GetAllControls(Control top)
 		{
@@ -157,6 +157,16 @@ namespace FEC_Michiten_ClassLibrary.Util
 			Shell32.FolderItem folderItem = objFolder.ParseName(Path.GetFileName(file));
 
 			return objFolder.GetDetailsOf(folderItem, (int)FileProperty.Comment);
+		}
+		public static bool CheckFileNameChars(string fileName)
+		{
+			char[] invalidChars = Path.GetInvalidFileNameChars();
+
+			if (fileName.IndexOfAny(invalidChars) < 0)
+				return true;
+			else
+				return false;
+
 		}
 	}
 }

@@ -17,6 +17,8 @@ using FEC_Deletable_KenkeiViewer.Models;
 using FEC_Michiten_ClassLibrary.Models;
 using FEC_Michiten_ClassLibrary.UserCtrl;
 using static FEC_Michiten_ClassLibrary.Util.Define;
+using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 namespace FEC_Deletable_KenkeiViewer
 {
@@ -30,7 +32,7 @@ namespace FEC_Deletable_KenkeiViewer
         private PairsFunc pFunc;
 
         //ビューア用pairsmodel
-        private List<FEC_Michiten_ClassLibrary.Models.SignItem> dispList = new List<FEC_Michiten_ClassLibrary.Models.SignItem> ();
+        private List<FEC_Michiten_ClassLibrary.Models.SignItem> dispList = new List<FEC_Michiten_ClassLibrary.Models.SignItem>();
         //Aiちゃん用pairsmodel
         private Dictionary<string, Models.PairsModel> pairsModel = new Dictionary<string, Models.PairsModel>();
         private FEC_Michiten_ClassLibrary.Models.SignItem currentItem = null;
@@ -85,7 +87,7 @@ namespace FEC_Deletable_KenkeiViewer
             {
                 string strF = null;
                 //ファイル読み込み
-                using(StreamReader sr = new StreamReader(w))
+                using (StreamReader sr = new StreamReader(w))
                 {
                     strF = sr.ReadToEnd();
                 }
@@ -157,7 +159,7 @@ namespace FEC_Deletable_KenkeiViewer
                         }
                     }
 
-                    if(flg)
+                    if (flg)
                     {
                         disp.address.Ken = "a";
                     }
@@ -185,11 +187,11 @@ namespace FEC_Deletable_KenkeiViewer
 
         private string GetLabel(string label)
         {
-            if(string.IsNullOrEmpty(label))
+            if (string.IsNullOrEmpty(label))
             {
                 return string.Empty;
             }
-            else if(label.Contains("[[["))
+            else if (label.Contains("[[["))
             {
                 return label.Substring(0, label.IndexOf("[[["));
             }
@@ -256,6 +258,7 @@ namespace FEC_Deletable_KenkeiViewer
                 return;
 
             var item = listView.GetSelectedItem();
+            if(item==null) return;
 
             //地図とか画像を連動
             webViewCustom.OpenPopup(item);
@@ -327,7 +330,7 @@ namespace FEC_Deletable_KenkeiViewer
                 return;
 
             //本当に消すから何回も聞く
-            if (MessageBox.Show("消すyo？\nいいのね？","消すよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            if (MessageBox.Show("消すyo？\nいいのね？", "消すよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 == DialogResult.No)
             {
                 return;
@@ -356,7 +359,7 @@ namespace FEC_Deletable_KenkeiViewer
                     continue;
 
                 //IsSumiだったら消します
-                if(item.IsSumi)
+                if (item.IsSumi)
                 {
 
                     ////画像ファイルあれば削除
@@ -370,7 +373,7 @@ namespace FEC_Deletable_KenkeiViewer
                     tmpPm.Items.Remove(tmp);
                 }
 
-                if(!string.IsNullOrEmpty(item.Label))
+                if (!string.IsNullOrEmpty(item.Label))
                 {
                     tmp.Rename.Rename = item.Label;
                     tmp.Rename.Selected = true;
@@ -389,7 +392,7 @@ namespace FEC_Deletable_KenkeiViewer
                 Directory.CreateDirectory(Path.Combine(txtFolder.Text, "convert"));
             }
 
-            foreach (KeyValuePair<string,  Models.PairsModel> pair in pairsModel)
+            foreach (KeyValuePair<string, Models.PairsModel> pair in pairsModel)
             {
                 //indexを振り直し、これしないとAIちゃんに戻したときによろしくないから
                 pair.Value.Items.ForEach(x => x.Index = pair.Value.Items.IndexOf(x));
@@ -449,7 +452,7 @@ namespace FEC_Deletable_KenkeiViewer
                 }
             }
 
-            if(flg)
+            if (flg)
             {
                 MessageBox.Show("既にあるyo");
             }
@@ -460,9 +463,67 @@ namespace FEC_Deletable_KenkeiViewer
 
             UpdateList();
             listView.Init(dispList, string.Empty);
+        }
+
+        /// <summary>
+        /// DataGridViewダブルクリック -> 納品ラベル入力ダイアログ表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listView_ListcCellDClickEvent(object sender, DataGridViewCellEventArgs e)
+        {
+            // 行未選択の場合は抜ける
+            if (e.RowIndex < 0) return;
+
+            // カラムがラベルでなければ抜ける
+            string colName = ((DataGridView)sender).Columns[e.ColumnIndex].Name;
+            if (colName != "label") return;
+            
+            // 現在のラベル値を取得
+            var selectedCell = ((DataGridView)sender)[e.ColumnIndex, e.RowIndex];
+            string label = selectedCell.Value.ToString();
+
+
+            // 編集フォームを開いて文字列を受け取る
+            string tbValue = "";
+
+            EditForm editForm = new EditForm(dispList , label);
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                tbValue = editForm.tbValue;
+                Debug.WriteLine(tbValue);
+            }
+            else { return; }
+
+            // 文字列をdispListに入れて表示を更新する
+            dispList[e.RowIndex].Label = tbValue;
+            var test = dispList;
+            UpdateList();
+            listView.Init(dispList, string.Empty);
+
+            // SetSelectedItemで元の行を選択する
+            var selectSerialNo = ((DataGridView)sender)[0, e.RowIndex].Value.ToString();
+            FEC_Michiten_ClassLibrary.Models.SignItem item = dispList.FirstOrDefault(x => x.No == selectSerialNo);
+            listView.SetSelectedItem(item);
+
+            // 重複する時のポップアップ
+            // 文字列が空欄なら行わない
+            if (String.IsNullOrEmpty(tbValue)) return;
+            bool flg = false;
+            foreach (FEC_Michiten_ClassLibrary.Models.SignItem sign in dispList)
+            {
+                if (sign.Label == tbValue && sign.No != item.No)
+                {
+                    flg = true;
+                    break;
+                }
+            }
+
+            if (flg)
+            {
+                MessageBox.Show("既にあるyo");
+            }
 
         }
     }
-
-
 }

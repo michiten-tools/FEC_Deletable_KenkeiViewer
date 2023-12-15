@@ -159,6 +159,7 @@
             this.label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.label.HeaderText = "ラベル";
             this.label.Name = "label";
+            this.label.ReadOnly = true;
             // 
             // ListView
             // 
