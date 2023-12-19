@@ -60,20 +60,24 @@ namespace FEC_Michiten_ClassLibrary.Pairs
 					view.Rows[index].Cells["viewExcel"].Value = new Bitmap(Resources.xlsxNon);
 
                 view.Rows[index].Cells["label"].Value = item.Label;
-                //if (item.IsSumi)
-                //	view.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
 
+				// 重複フラグが立っていたら赤色
 				if(item.address.Ken == "a")
 				{
                     view.Rows[index].DefaultCellStyle.BackColor = Color.Red;
+                }
 
+				// 削除フラグが立っていたら灰色
+                if (item.IsSumi)
+				{
+                    view.Rows[index].DefaultCellStyle.BackColor = Color.Gray;
                 }
             }
 
 
 
-			// 列表示の切り替え
-			if (mode.Equals(PairsMode.Lot))
+            // 列表示の切り替え
+            if (mode.Equals(PairsMode.Lot))
 			{
 				view.Columns["no"].Visible = true;
 				//view.Columns["viewLabel"].Visible = false;

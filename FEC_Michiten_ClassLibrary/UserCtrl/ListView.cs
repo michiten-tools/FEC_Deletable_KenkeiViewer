@@ -62,10 +62,21 @@ namespace FEC_Michiten_ClassLibrary.UserCtrl
         public void SetSelectedItem(SignItem item)
         {
             int idx = listFunc.GetRowIndex(item.No);
-
+            
             if(idx != -1)
             {
                 dgvItemList.Rows[idx].Selected= true;
+            }
+            listFunc.Scroll();
+        }
+
+        public void SetFirstItem()
+        {
+            if(dgvItemList.Rows.Count > 0)
+            {
+                // 選択イベント発生を発生させるためオフ -> オン
+                dgvItemList.Rows[0].Selected = false;
+                dgvItemList.Rows[0].Selected = true;
             }
             listFunc.Scroll();
         }

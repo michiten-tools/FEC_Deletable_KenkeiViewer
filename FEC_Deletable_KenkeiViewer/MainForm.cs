@@ -137,6 +137,9 @@ namespace FEC_Deletable_KenkeiViewer
             imageView.Init(folderName);
             webViewCustom.AddIconTarget(dispList);
             isOpen = true;
+
+            // 最初の項目を選択する
+            listView.SetFirstItem();
         }
 
         private void UpdateList()
@@ -151,8 +154,9 @@ namespace FEC_Deletable_KenkeiViewer
                     foreach (var x in dispList)
                     {
                         string xstr = GetLabel(x.Label);
-
-                        if (!x.Equals(disp) && dispstr == xstr && disp.Memo != x.Memo)
+                        
+                        // 同じ作業者でも被りは許可しない
+                        if (!x.Equals(disp) && dispstr == xstr)
                         {
                             flg = true;
                             break;
@@ -413,6 +417,8 @@ namespace FEC_Deletable_KenkeiViewer
             listView.dgvItemList.Rows.Clear();
             txtFolder.Text = string.Empty;
 
+            // 画像の初期化
+            imageView.SetImage(null);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
