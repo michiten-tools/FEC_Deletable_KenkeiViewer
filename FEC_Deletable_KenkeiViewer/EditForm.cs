@@ -75,5 +75,18 @@ namespace FEC_Deletable_KenkeiViewer
         {
             this.Close();
         }
+
+        /// <summary>
+        /// Enter押下で確定ボタンの動作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btSubmit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Return) 
+            {
+                btSubmit_Click(sender, e);
+            }
+        }
     }
 }

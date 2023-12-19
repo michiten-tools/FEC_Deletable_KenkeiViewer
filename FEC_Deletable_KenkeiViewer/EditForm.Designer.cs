@@ -54,6 +54,7 @@
             this.btSubmit.Text = "確定";
             this.btSubmit.UseVisualStyleBackColor = false;
             this.btSubmit.Click += new System.EventHandler(this.btSubmit_Click);
+            this.btSubmit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btSubmit_KeyDown);
             // 
             // btCancel
             // 
