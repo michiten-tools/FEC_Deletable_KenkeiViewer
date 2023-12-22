@@ -170,6 +170,7 @@
             this.webViewCustom.Name = "webViewCustom";
             this.webViewCustom.Size = new System.Drawing.Size(708, 338);
             this.webViewCustom.TabIndex = 0;
+            this.webViewCustom.WebViewIconClickEvent += new FEC_Michiten_ClassLibrary.Map.MapFunc.IconClickEventHandler(this.webViewCustom_WebViewIconClickEvent);
             // 
             // textBox1
             // 

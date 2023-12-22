@@ -19,6 +19,7 @@ using FEC_Michiten_ClassLibrary.UserCtrl;
 using static FEC_Michiten_ClassLibrary.Util.Define;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
+using System.Reflection;
 
 namespace FEC_Deletable_KenkeiViewer
 {
@@ -142,6 +143,10 @@ namespace FEC_Deletable_KenkeiViewer
             listView.SetFirstItem();
         }
 
+        /// <summary>
+        /// dispListのラベル(ラベルのみ)に重複があればaddress.Kenにフラグ立てる
+        /// 異なる作業者の場合のみフラグ立てる
+        /// </summary>
         private void UpdateList()
         {
             dispList.ForEach(disp =>
@@ -155,8 +160,7 @@ namespace FEC_Deletable_KenkeiViewer
                     {
                         string xstr = GetLabel(x.Label);
                         
-                        // 同じ作業者でも被りは許可しない
-                        if (!x.Equals(disp) && dispstr == xstr)
+                        if (!x.Equals(disp) && dispstr == xstr && disp.Memo != x.Memo)
                         {
                             flg = true;
                             break;
@@ -333,19 +337,6 @@ namespace FEC_Deletable_KenkeiViewer
             if (!isOpen)
                 return;
 
-            //本当に消すから何回も聞く
-            if (MessageBox.Show("消すyo？\nいいのね？", "消すよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                == DialogResult.No)
-            {
-                return;
-            }
-
-            if (MessageBox.Show("本当に消すyo？\n知らないよ？", "本気よ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                == DialogResult.No)
-            {
-                return;
-            }
-
             if (MessageBox.Show("マジで消すyo？\n後悔するよ？", "マジよ？", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 == DialogResult.No)
             {
@@ -489,11 +480,14 @@ namespace FEC_Deletable_KenkeiViewer
             var selectedCell = ((DataGridView)sender)[e.ColumnIndex, e.RowIndex];
             string label = selectedCell.Value.ToString();
 
+            // 現在のアイテムを取得
+            var selectSerialNo = ((DataGridView)sender)[0, e.RowIndex].Value.ToString();
+            FEC_Michiten_ClassLibrary.Models.SignItem item = dispList.FirstOrDefault(x => x.No == selectSerialNo);
 
             // 編集フォームを開いて文字列を受け取る
             string tbValue = "";
-
             EditForm editForm = new EditForm(dispList , label);
+
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 tbValue = editForm.tbValue;
@@ -501,35 +495,37 @@ namespace FEC_Deletable_KenkeiViewer
             }
             else { return; }
 
-            // 文字列をdispListに入れて表示を更新する
-            dispList[e.RowIndex].Label = tbValue;
-            var test = dispList;
-            UpdateList();
-            listView.Init(dispList, string.Empty);
+            // ラベル重複(コメント含み)する時の警告ダイアログ
+            bool isLabelDuplication = false;
 
-            // SetSelectedItemで元の行を選択する
-            var selectSerialNo = ((DataGridView)sender)[0, e.RowIndex].Value.ToString();
-            FEC_Michiten_ClassLibrary.Models.SignItem item = dispList.FirstOrDefault(x => x.No == selectSerialNo);
-            listView.SetSelectedItem(item);
-
-            // 重複する時のポップアップ
-            // 文字列が空欄なら行わない
-            if (String.IsNullOrEmpty(tbValue)) return;
-            bool flg = false;
             foreach (FEC_Michiten_ClassLibrary.Models.SignItem sign in dispList)
             {
+                // 文字列が空欄ならフラグを立てない
+                if (String.IsNullOrEmpty(tbValue)) break;
+
                 if (sign.Label == tbValue && sign.No != item.No)
                 {
-                    flg = true;
+                    isLabelDuplication = true;
                     break;
                 }
             }
 
-            if (flg)
+            if (isLabelDuplication)
             {
-                MessageBox.Show("既にあるyo");
+                MessageBox.Show("ラベルが重複しています。\n入力は取り消されました。",
+                    "エラー",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
 
+            // 文字列をdispListに入れて表示を更新する
+            dispList[e.RowIndex].Label = tbValue;
+            UpdateList();
+            listView.Init(dispList, string.Empty);
+
+            // SetSelectedItemで元の行を選択する
+            listView.SetSelectedItem(item);
         }
     }
 }

@@ -15,9 +15,6 @@ namespace FEC_Deletable_KenkeiViewer
     {
         List<SignItem> items = new List<SignItem>();
 
-        public delegate void SubmitEventHandler(string label);
-        public event SubmitEventHandler SubmitEvent;
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
